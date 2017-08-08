@@ -4,12 +4,12 @@ from omxplayer import OMXPlayer
 from omxplayer.keys import *
 
 streams = [
-    "rtsp://admin:12345678@192.168.10.240:554/cam/realmonitor?channel=1&subtype=1",
-    "rtsp://admin:12345678@192.168.10.241:554/cam/realmonitor?channel=1&subtype=1",
-    "rtsp://admin:12345678@192.168.10.242:554/cam/realmonitor?channel=1&subtype=1",
-    "rtsp://admin:12345678@192.168.10.243:554/cam/realmonitor?channel=1&subtype=1",
-    "rtsp://admin:12345678@192.168.10.244:554/cam/realmonitor?channel=1&subtype=1",
-    "rtsp://admin:12345678@192.168.10.245:554/cam/realmonitor?channel=1&subtype=1",
+    "rtsp://admin:12345678@192.168.10.240:554/cam/realmonitor?channel=1&subtype=0",
+    "rtsp://admin:12345678@192.168.10.241:554/cam/realmonitor?channel=1&subtype=0",
+    "rtsp://admin:12345678@192.168.10.242:554/cam/realmonitor?channel=1&subtype=0",
+    "rtsp://admin:12345678@192.168.10.243:554/cam/realmonitor?channel=1&subtype=0",
+    "rtsp://admin:12345678@192.168.10.244:554/cam/realmonitor?channel=1&subtype=0",
+    "rtsp://admin:12345678@192.168.10.245:554/cam/realmonitor?channel=1&subtype=0",
     "rtsp://admin:12345678@192.168.10.246:554/cam/realmonitor?channel=1&subtype=1",
     "rtsp://admin:12345678@192.168.10.247:554/cam/realmonitor?channel=1&subtype=1",
     "rtsp://admin:12345678@192.168.10.248:554/cam/realmonitor?channel=1&subtype=1",

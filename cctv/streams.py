@@ -30,7 +30,7 @@ class CameraStream(Resource):
         return {'stream': streams[cam_num]}
 
 
-api.add_resource(CameraStream, '/cam/<string:cam_num>')
+api.add_resource(CameraStream, '/cam/<int:cam_num>')
 
 
 if __name__ == '__main__':

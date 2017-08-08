@@ -21,7 +21,7 @@ streams = [
 app = Flask(__name__)
 api = Api(app)
 
-player = OMXPlayer(streams[0], args=['--no-osd', '--live'])
+player = OMXPlayer(streams[0], args=['--no-osd', '--live', '--blank'])
 
 
 class CameraStream(Resource):

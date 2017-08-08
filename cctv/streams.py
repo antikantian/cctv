@@ -3,13 +3,6 @@ from flask_restful import Resource, Api
 from omxplayer import OMXPlayer
 from omxplayer.keys import *
 
-import socket
-import time
-import subprocess
-import multiprocessing
-import urllib.parse
-import logging
-
 streams = [
     "rtsp://admin:12345678@192.168.10.240:554/cam/realmonitor?channel=1&subtype=1",
     "rtsp://admin:12345678@192.168.10.241:554/cam/realmonitor?channel=1&subtype=1",

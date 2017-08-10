@@ -35,5 +35,6 @@ api.add_resource(CameraStream, '/cam/<int:cam_num>')
 
 
 if __name__ == '__main__':
+    player.load(streams[0])
     app.run(host='0.0.0.0')
 

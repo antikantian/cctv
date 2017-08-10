@@ -23,12 +23,16 @@ app = Flask(__name__)
 api = Api(app)
 
 player = OMXPlayer(streams[0], args=['--avdict="rtsp_transport:tcp"', '--threshold=.01', '--video_fifo=.01', '--fps=15'])
+current_cam = 0
 
 
 class CameraStream(Resource):
     def get(self, cam_num):
-        player.load(streams[cam_num])
-        return {'stream': streams[cam_num]}
+        if current_cam == cam_num:
+            return {'stream': cam_num}
+        else:
+            player.load(streams[cam_num])
+            return {'stream': cam_num}
 
 
 api.add_resource(CameraStream, '/cam/<int:cam_num>')

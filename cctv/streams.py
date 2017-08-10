@@ -5,10 +5,10 @@ from omxplayer.keys import *
 
 
 streams = [
-    "rtsp://192.168.10.39:5554/stream240",
-    "rtsp://192.168.10.39:5554/stream241",
-    "rtsp://192.168.10.39:5554/stream242",
-    "rtsp://192.168.10.39:5554/stream243",
+    "rtsp://admin:12345678@192.168.10.240:554/cam/realmonitor?channel=1&subtype=0",
+    "rtsp://admin:12345678@192.168.10.241:554/cam/realmonitor?channel=1&subtype=0",
+    "rtsp://admin:12345678@192.168.10.242:554/cam/realmonitor?channel=1&subtype=0",
+    "rtsp://admin:12345678@192.168.10.243:554/cam/realmonitor?channel=1&subtype=0",
     "rtsp://admin:12345678@192.168.10.244:554/cam/realmonitor?channel=1&subtype=0",
     "rtsp://admin:12345678@192.168.10.245:554/cam/realmonitor?channel=1&subtype=0",
     "rtsp://admin:12345678@192.168.10.246:554/cam/realmonitor?channel=1&subtype=1",
@@ -22,7 +22,7 @@ streams = [
 app = Flask(__name__)
 api = Api(app)
 
-player = OMXPlayer(streams[0], args=['--live', '--threshold=.01', '--video_fifo=.01', '--fps=20'])
+player = OMXPlayer(streams[0], args=['--avdict=rtsp_transport:tcp', '--threshold=.01', '--video_fifo=.01', '--fps=20'])
 
 
 class CameraStream(Resource):

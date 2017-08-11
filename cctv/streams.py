@@ -105,7 +105,7 @@ p1 = OMXPlayer(
         '--avdict="rtsp_transport:tcp"',
         '--threshold=.01',
         '--video_fifo=.01',
-        '--win="16,0,368,288"'
+        '--win="16 0 368 288"'
     ]
 )
 p2 = OMXPlayer(
@@ -115,7 +115,7 @@ p2 = OMXPlayer(
         '--threshold=.01',
         '--video_fifo=.01',
         '--layer=1',
-        '--win="400,0,752,288"'
+        '--win="400 0 752 288"'
     ]
 )
 p3 = OMXPlayer(
@@ -125,7 +125,7 @@ p3 = OMXPlayer(
         '--threshold=.01',
         '--video_fifo=.01',
         '--layer=1',
-        '--win="784,0,1136,288"'
+        '--win="784 0 1136 288"'
     ]
 )
 p4 = OMXPlayer(
@@ -135,7 +135,7 @@ p4 = OMXPlayer(
         '--threshold=.01',
         '--video_fifo=.01',
         '--layer=1',
-        '--win="1168,0,1520,288"'
+        '--win="1168 0 1520 288"'
     ]
 )
 p5 = OMXPlayer(
@@ -145,7 +145,7 @@ p5 = OMXPlayer(
         '--threshold=.01',
         '--video_fifo=.01',
         '--layer=1',
-        '--win="1552,0,1904,288"'
+        '--win="1552 0 1904 288"'
     ]
 )
 

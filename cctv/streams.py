@@ -19,70 +19,6 @@ streams = [
     "rtsp://192.168.10.171:554/stander/livestream/0/0"
 ]
 
-
-class TiledPlayers(object):
-    def __init__(self):
-        self.c1 = "rtsp://admin:12345678@192.168.10.240:554/cam/realmonitor?channel=1&subtype=1"
-        self.c2 = "rtsp://admin:12345678@192.168.10.241:554/cam/realmonitor?channel=1&subtype=1"
-        self.c3 = "rtsp://admin:12345678@192.168.10.242:554/cam/realmonitor?channel=1&subtype=1"
-        self.c4 = "rtsp://admin:12345678@192.168.10.243:554/cam/realmonitor?channel=1&subtype=1"
-        self.c5 = "rtsp://admin:12345678@192.168.10.244:554/cam/realmonitor?channel=1&subtype=1"
-        self.p1 = OMXPlayer(
-            self.c1,
-            args=[
-                '--avdict="rtsp_transport:tcp"',
-                '--threshold=.01',
-                '--video_fifo=.01',
-                '--win=16,0,368,288'
-            ]
-        )
-        self.p2 = OMXPlayer(
-            self.c2,
-            args=[
-                '--avdict="rtsp_transport:tcp"',
-                '--threshold=.01',
-                '--video_fifo=.01',
-                '--layer=1',
-                '--win=400,0,752,288'
-            ]
-        )
-        self.p3 = OMXPlayer(
-            self.c3,
-            args=[
-                '--avdict="rtsp_transport:tcp"',
-                '--threshold=.01',
-                '--video_fifo=.01',
-                '--layer=1',
-                '--win=784,0,1136,288'
-            ]
-        )
-        self.p4 = OMXPlayer(
-            self.c4,
-            args=[
-                '--avdict="rtsp_transport:tcp"',
-                '--threshold=.01',
-                '--video_fifo=.01',
-                '--layer=1',
-                '--win=1168,0,1520,288'
-            ]
-        )
-        self.p5 = OMXPlayer(
-            self.c5,
-            args=[
-                '--avdict="rtsp_transport:tcp"',
-                '--threshold=.01',
-                '--video_fifo=.01',
-                '--layer=1',
-                '--win=1552,0,1904,288'
-            ]
-        )
-
-
-
-
-app = Flask(__name__)
-api = Api(app)
-
 player = OMXPlayer(
     streams[0],
     args=[
@@ -190,6 +126,9 @@ class CameraTile(Resource):
             hide_all()
             return {'stream': 'not_tiled'}
 
+
+app = Flask(__name__)
+api = Api(app)
 
 api.add_resource(CameraStream, '/cam/<int:cam_num>')
 api.add_resource(CameraTile, '/cam/<string:action>')

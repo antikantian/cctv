@@ -24,7 +24,7 @@ player = OMXPlayer(
     args=[
         '--avdict="rtsp_transport:tcp"',
         '--threshold=0',
-        '--video_fifo=.01',
+        '--video_fifo=0',
         '--fps=15',
         '--layer=2'
     ]

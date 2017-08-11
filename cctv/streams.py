@@ -31,7 +31,7 @@ class TiledPlayers(object):
             self.c1,
             args=[
                 '--avdict="rtsp_transport:tcp"',
-                '--threshod=.01',
+                '--threshold=.01',
                 '--video_fifo=.01',
                 '--win=16,0,368,288'
             ]
@@ -40,7 +40,7 @@ class TiledPlayers(object):
             self.c2,
             args=[
                 '--avdict="rtsp_transport:tcp"',
-                '--threshod=.01',
+                '--threshold=.01',
                 '--video_fifo=.01',
                 '--layer=1',
                 '--win=400,0,752,288'
@@ -50,7 +50,7 @@ class TiledPlayers(object):
             self.c3,
             args=[
                 '--avdict="rtsp_transport:tcp"',
-                '--threshod=.01',
+                '--threshold=.01',
                 '--video_fifo=.01',
                 '--layer=1',
                 '--win=784,0,1136,288'
@@ -60,7 +60,7 @@ class TiledPlayers(object):
             self.c4,
             args=[
                 '--avdict="rtsp_transport:tcp"',
-                '--threshod=.01',
+                '--threshold=.01',
                 '--video_fifo=.01',
                 '--layer=1',
                 '--win=1168,0,1520,288'
@@ -70,7 +70,7 @@ class TiledPlayers(object):
             self.c5,
             args=[
                 '--avdict="rtsp_transport:tcp"',
-                '--threshod=.01',
+                '--threshold=.01',
                 '--video_fifo=.01',
                 '--layer=1',
                 '--win=1552,0,1904,288'

@@ -4,31 +4,31 @@ from omxplayer import OMXPlayer
 from omxplayer.keys import HIDE_VIDEO, UNHIDE_VIDEO
 
 
-streams = [
-    "rtsp://admin:12345678@192.168.10.240:554/cam/realmonitor?channel=1&subtype=0",
-    "rtsp://admin:12345678@192.168.10.241:554/cam/realmonitor?channel=1&subtype=0",
-    "rtsp://admin:12345678@192.168.10.242:554/cam/realmonitor?channel=1&subtype=0",
-    "rtsp://admin:12345678@192.168.10.243:554/cam/realmonitor?channel=1&subtype=0",
-    "rtsp://admin:12345678@192.168.10.244:554/cam/realmonitor?channel=1&subtype=0",
-    "rtsp://admin:12345678@192.168.10.245:554/cam/realmonitor?channel=1&subtype=0",
-    "rtsp://admin:12345678@192.168.10.246:554/cam/realmonitor?channel=1&subtype=0",
-    "rtsp://admin:12345678@192.168.10.247:554/cam/realmonitor?channel=1&subtype=0",
-    "rtsp://admin:12345678@192.168.10.248:554/cam/realmonitor?channel=1&subtype=0",
-    "rtsp://admin:12345678@192.168.10.249:554/cam/realmonitor?channel=1&subtype=0",
-    "rtsp://192.168.10.170:554/stander/livestream/0/0",
-    "rtsp://192.168.10.171:554/stander/livestream/0/0"
-]
-
-player = OMXPlayer(
-    streams[0],
-    args=[
-        '--avdict="rtsp_transport:tcp"',
-        '--threshold=.01',
-        '--video_fifo=.01',
-        '--fps=15',
-        '--layer=2'
-    ]
-)
+# streams = [
+#     "rtsp://admin:12345678@192.168.10.240:554/cam/realmonitor?channel=1&subtype=0",
+#     "rtsp://admin:12345678@192.168.10.241:554/cam/realmonitor?channel=1&subtype=0",
+#     "rtsp://admin:12345678@192.168.10.242:554/cam/realmonitor?channel=1&subtype=0",
+#     "rtsp://admin:12345678@192.168.10.243:554/cam/realmonitor?channel=1&subtype=0",
+#     "rtsp://admin:12345678@192.168.10.244:554/cam/realmonitor?channel=1&subtype=0",
+#     "rtsp://admin:12345678@192.168.10.245:554/cam/realmonitor?channel=1&subtype=0",
+#     "rtsp://admin:12345678@192.168.10.246:554/cam/realmonitor?channel=1&subtype=0",
+#     "rtsp://admin:12345678@192.168.10.247:554/cam/realmonitor?channel=1&subtype=0",
+#     "rtsp://admin:12345678@192.168.10.248:554/cam/realmonitor?channel=1&subtype=0",
+#     "rtsp://admin:12345678@192.168.10.249:554/cam/realmonitor?channel=1&subtype=0",
+#     "rtsp://192.168.10.170:554/stander/livestream/0/0",
+#     "rtsp://192.168.10.171:554/stander/livestream/0/0"
+# ]
+#
+# player = OMXPlayer(
+#     streams[0],
+#     args=[
+#         '--avdict="rtsp_transport:tcp"',
+#         '--threshold=.01',
+#         '--video_fifo=.01',
+#         '--fps=15',
+#         '--layer=2'
+#     ]
+# )
 
 c1 = "rtsp://admin:12345678@192.168.10.240:554/cam/realmonitor?channel=1&subtype=1"
 c2 = "rtsp://admin:12345678@192.168.10.241:554/cam/realmonitor?channel=1&subtype=1"
@@ -106,23 +106,23 @@ def unhide_all():
 current_cam = 0
 
 
-class CameraStream(Resource):
-    def get(self, cam_num):
-        if current_cam == cam_num:
-            return {'stream': cam_num}
-        else:
-            player.load(streams[cam_num])
-            return {'stream': cam_num}
+# class CameraStream(Resource):
+#     def get(self, cam_num):
+#         if current_cam == cam_num:
+#             return {'stream': cam_num}
+#         else:
+#             player.load(streams[cam_num])
+#             return {'stream': cam_num}
 
 
 class CameraTile(Resource):
     def get(self, action):
         if action == 'tile':
-            player.action(HIDE_VIDEO)
+            # player.action(HIDE_VIDEO)
             unhide_all()
             return {'stream': 'tiled'}
         else:
-            player.action(UNHIDE_VIDEO)
+            # player.action(UNHIDE_VIDEO)
             hide_all()
             return {'stream': 'not_tiled'}
 
@@ -130,7 +130,7 @@ class CameraTile(Resource):
 app = Flask(__name__)
 api = Api(app)
 
-api.add_resource(CameraStream, '/cam/<int:cam_num>')
+# api.add_resource(CameraStream, '/cam/<int:cam_num>')
 api.add_resource(CameraTile, '/cam/<string:action>')
 
 

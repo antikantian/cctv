@@ -26,7 +26,8 @@ player = OMXPlayer(
         '--threshold=0',
         '--video_fifo=0',
         '--fps=15',
-        '--layer=2'
+        '--layer=2',
+        '--live'
     ]
 )
 

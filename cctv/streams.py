@@ -55,7 +55,7 @@ for i in range(len(streams)):
             ]
         )
         player.action(HIDE_VIDEO)
-        
+
     print("Started player: %s" % i)
     time.sleep(1)
     #player.action(PAUSE)
@@ -145,9 +145,9 @@ class CameraStream(Resource):
         if current_cam == cam_num:
             return {'stream': cam_num}
         else:
-            players[current_cam].pause()
+            #players[current_cam].pause()
             players[current_cam].action(HIDE_VIDEO)
-            players[cam_num].play()
+            #players[cam_num].play()
             players[cam_num].action(UNHIDE_VIDEO)
             current_cam = cam_num
             return {'stream': cam_num}

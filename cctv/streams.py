@@ -83,7 +83,7 @@ for i in range(len(streams)):
         #     pb_status = player.playback_status() == "Playing"
 
     print("Started player: %s" % i)
-    time.sleep(2)
+    time.sleep(5)
     #player.action(PAUSE)
     players.append(player)
 

@@ -62,6 +62,19 @@ for i in range(len(streams)):
     #player.action(PAUSE)
     players.append(player)
 
+
+def check_players():
+    global players
+    for j in range(len(players)):
+        p = players[j]
+        pb_status = p.playback_status() == "Playing"
+        while not pb_status:
+            print("Player %s not playing, attempting restart" % j)
+            p.play()
+            time.sleep(5)
+            pb_status = p.playback_status() == "Playing"
+
+
 # player = OMXPlayer(
 #     streams[0],
 #     args=[
@@ -129,13 +142,6 @@ for i in range(len(streams)):
 #
 #
 
-
-def player_action(p, action):
-    for player in p:
-        player.action(action)
-    return
-
-
 current_cam = 0
 
 
@@ -176,5 +182,7 @@ api.add_resource(CameraStream, '/cam/<int:cam_num>')
 
 
 if __name__ == '__main__':
+    print("Checking Players")
+    check_players()
     app.run(host='0.0.0.0')
 

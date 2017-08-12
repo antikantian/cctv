@@ -35,8 +35,8 @@ for i in range(len(streams)):
             args=[
                 "--layer=%s" % i,
                 "--live",
-                "--threshold=1",
-                "--video_fifo=1",
+                "--threshold=5",
+                "--video_fifo=5",
                 "--timeout=0",
                 "--genlog",
                 "--win=0,0,1920,1080"
@@ -50,8 +50,8 @@ for i in range(len(streams)):
             args=[
                 "--layer=%s" % i,
                 "--live",
-                "--threshold=0",
-                "--video_fifo=0",
+                "--threshold=5",
+                "--video_fifo=5",
                 "--timeout=0",
                 "--dbus_name=%s" % dbus_id,
                 "--win=-1920,-1080,0,0",
@@ -159,17 +159,12 @@ class CameraStream(Resource):
     def get(self, cam_num):
         global current_cam
         global players
-        if current_cam == cam_num:
-            return {'stream': cam_num}
-        else:
-            #players[current_cam].pause()
-            #players[current_cam].action(HIDE_VIDEO)
-            players[current_cam].set_video_pos(-1920, -1080, 0, 0)
-            #players[cam_num].play()
-            #players[cam_num].action(UNHIDE_VIDEO)
-            players[cam_num].set_video_pos(0, 0, 1920, 1080)
-            current_cam = cam_num
-            return {'stream': cam_num}
+        #players[current_cam].action(HIDE_VIDEO)
+        players[current_cam].set_video_pos(-1920, -1080, 0, 0)
+        #players[cam_num].action(UNHIDE_VIDEO)
+        players[cam_num].set_video_pos(0, 0, 1920, 1080)
+        current_cam = cam_num
+        return {'stream': cam_num}
 
 
 # class CameraTile(Resource):

@@ -84,8 +84,10 @@ for i in range(len(streams)):
 
     print("Started player: %s" % i)
     time.sleep(5)
-    #player.action(PAUSE)
     player.set_alpha(150)
+    time.sleep(0.5)
+    player.action(HIDE_VIDEO)
+    time.sleep(0.5)
     players.append(player)
 
 
@@ -96,10 +98,14 @@ class CameraStream(Resource):
     def get(self, cam_num):
         global current_cam
         global players
-        #players[current_cam].action(HIDE_VIDEO)
+        players[current_cam].action(HIDE_VIDEO)
+        time.sleep(0.5)
         players[current_cam].set_video_pos(-1920, -1080, 0, 0)
-        #players[cam_num].action(UNHIDE_VIDEO)
+        time.sleep(0.5)
+        players[cam_num].action(UNHIDE_VIDEO)
+        time.sleep(0.5)
         players[cam_num].set_video_pos(0, 0, 1920, 1080)
+        time.sleep(0.5)
         current_cam = cam_num
         return {'stream': cam_num}
 

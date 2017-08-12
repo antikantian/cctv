@@ -26,7 +26,7 @@ players = []
 for i in range(len(streams)):
     player = OMXPlayer(
         streams[i],
-        dbus_name="io.media.players.omxplayer%s" % i,
+        dbus_name="org.mpris.MediaPlayer2.omxplayer%s" % i,
         args=[
             "--layer=%s" % i,
             "--avdict='rtsp_transport:udp'",

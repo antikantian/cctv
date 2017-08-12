@@ -33,7 +33,7 @@ for i in range(len(streams)):
             streams[i],
             dbus_name="org.mpris.MediaPlayer2.omxplayer",
             args=[
-                "--blank",
+                #"--blank",
                 "--layer=%s" % i,
                 "--live",
                 "--threshold=0.8",
@@ -49,7 +49,7 @@ for i in range(len(streams)):
             streams[i],
             dbus_name=dbus_id,
             args=[
-                "--blank",
+                #"--blank",
                 "--layer=%s" % i,
                 "--live",
                 "--threshold=0.8",

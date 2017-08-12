@@ -19,15 +19,33 @@ streams = [
     "rtsp://192.168.10.171:554/stander/livestream/0/0"
 ]
 
-player = OMXPlayer(
-    streams[0],
-    args=[
-        '--avdict="rtsp_transport:tcp"',
-        '--threshold=0.5',
-        '--video_fifo=0.5',
-        '--fps=15'
-    ]
-)
+players = []
+
+for i in range(len(streams)):
+    player = OMXPlayer(
+        streams[i],
+        args=[
+            "--dbus_name=io.media.players%s" % i,
+            "--layer=%s" % i,
+            "--avdict='rtsp_transport:udp'",
+            "--threshold=0",
+            "--video_fifo=0",
+            "--timeout=0"
+        ],
+        pause=True
+    )
+    player.action(HIDE_VIDEO)
+    players.append(player)
+
+# player = OMXPlayer(
+#     streams[0],
+#     args=[
+#         '--avdict="rtsp_transport:tcp"',
+#         '--threshold=0.5',
+#         '--video_fifo=0.5',
+#         '--fps=15'
+#     ]
+# )
 
 # c1 = "rtsp://admin:12345678@192.168.10.240:554/cam/realmonitor?channel=1&subtype=1"
 # c2 = "rtsp://admin:12345678@192.168.10.241:554/cam/realmonitor?channel=1&subtype=1"
@@ -85,32 +103,29 @@ player = OMXPlayer(
 # )
 #
 #
-# def hide_all():
-#     p1.action(HIDE_VIDEO)
-#     p2.action(HIDE_VIDEO)
-#     p3.action(HIDE_VIDEO)
-#     p4.action(HIDE_VIDEO)
-#     p5.action(HIDE_VIDEO)
-#     return True
-#
-#
-# def unhide_all():
-#     p1.action(UNHIDE_VIDEO)
-#     p2.action(UNHIDE_VIDEO)
-#     p3.action(UNHIDE_VIDEO)
-#     p4.action(UNHIDE_VIDEO)
-#     p5.action(UNHIDE_VIDEO)
-#     return True
+
+
+def player_action(p, action):
+    for player in p:
+        player.action(action)
+    return
+
 
 current_cam = 0
 
 
 class CameraStream(Resource):
     def get(self, cam_num):
+        global current_cam
+        global players
         if current_cam == cam_num:
             return {'stream': cam_num}
         else:
-            player.load(streams[cam_num])
+            players[current_cam].pause()
+            players[current_cam].action(HIDE_VIDEO)
+            players[cam_num].play()
+            players[cam_num].action(UNHIDE_VIDEO)
+            current_cam = cam_num
             return {'stream': cam_num}
 
 

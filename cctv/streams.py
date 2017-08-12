@@ -34,6 +34,7 @@ for i in range(len(streams)):
             dbus_name="org.mpris.MediaPlayer2.omxplayer",
             args=[
                 "--layer=%s" % i,
+                "--live",
                 "--threshold=1",
                 "--video_fifo=1",
                 "--timeout=0",
@@ -48,38 +49,39 @@ for i in range(len(streams)):
             dbus_name=dbus_id,
             args=[
                 "--layer=%s" % i,
+                "--live",
                 "--threshold=0",
                 "--video_fifo=0",
                 "--timeout=0",
                 "--dbus_name=%s" % dbus_id,
-                "--win=-1920,-1080,0,0"
+                "--win=-1920,-1080,0,0",
                 "--genlog"
             ]
         )
-        time.sleep(5)
-        pb_status = player.playback_status() == "Playing"
-        while not pb_status:
-            print("Player %s not playing, attempting restart" % i)
-            player.quit()
-            time.sleep(2)
-            player = OMXPlayer(
-                streams[i],
-                dbus_name=dbus_id,
-                args=[
-                    "--layer=%s" % i,
-                    "--threshold=0",
-                    "--video_fifo=0",
-                    "--timeout=0",
-                    "--dbus_name=%s" % dbus_id,
-                    "--win=-1920,-1080,0,0"
-                    "--genlog"
-                ]
-            )
-            time.sleep(10)
-            pb_status = player.playback_status() == "Playing"
+        # time.sleep(5)
+        # pb_status = player.playback_status() == "Playing"
+        # while not pb_status:
+        #     print("Player %s not playing, attempting restart" % i)
+        #     player.quit()
+        #     time.sleep(2)
+        #     player = OMXPlayer(
+        #         streams[i],
+        #         dbus_name=dbus_id,
+        #         args=[
+        #             "--layer=%s" % i,
+        #             "--threshold=0",
+        #             "--video_fifo=0",
+        #             "--timeout=0",
+        #             "--dbus_name=%s" % dbus_id,
+        #             "--win=-1920,-1080,0,0"
+        #             "--genlog"
+        #         ]
+        #     )
+        #     time.sleep(10)
+        #     pb_status = player.playback_status() == "Playing"
 
     print("Started player: %s" % i)
-    time.sleep(1)
+    time.sleep(2)
     #player.action(PAUSE)
     players.append(player)
 

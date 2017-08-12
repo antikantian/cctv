@@ -36,7 +36,6 @@ for i in range(len(streams)):
                 "--threshold=0",
                 "--video_fifo=0",
                 "--timeout=0",
-                "--dbus_name=%s" % dbus_id
             ]
         )
     else:
@@ -48,7 +47,8 @@ for i in range(len(streams)):
                 "--avdict='rtsp_transport:tcp'",
                 "--threshold=0",
                 "--video_fifo=0",
-                "--timeout=0"
+                "--timeout=0",
+                "--dbus_name=%s" % dbus_id
             ]
         )
     print("Started player: %s" % i)

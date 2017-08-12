@@ -32,8 +32,7 @@ for i in range(len(streams)):
             "--avdict='rtsp_transport:udp'",
             "--threshold=0",
             "--video_fifo=0",
-            "--timeout=0",
-            "--genlog"
+            "--timeout=0"
         ]
     )
     time.sleep(10)

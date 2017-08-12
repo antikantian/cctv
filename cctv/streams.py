@@ -33,7 +33,6 @@ for i in range(len(streams)):
             streams[i],
             args=[
                 "--layer=%s" % i,
-                "--avdict='rtsp_transport:tcp'",
                 "--threshold=0",
                 "--video_fifo=0",
                 "--timeout=0",

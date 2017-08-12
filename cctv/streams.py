@@ -84,10 +84,6 @@ for i in range(len(streams)):
 
     print("Started player: %s" % i)
     time.sleep(5)
-    player.set_alpha(150)
-    time.sleep(0.5)
-    player.action(HIDE_VIDEO)
-    time.sleep(0.5)
     players.append(player)
 
 

@@ -40,7 +40,7 @@ for i in range(len(streams)):
                 "--video_queue=20",
                 "--timeout=0",
                 "--genlog",
-                "--win=0,0,1920,1080"
+                "--win=-1920,-1080,0,0"
                 "--dbus_name=org.mpris.MediaPlayer2.omxplayer"
             ]
         )

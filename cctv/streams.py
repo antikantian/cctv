@@ -3,6 +3,8 @@ from flask_restful import Resource, Api
 from omxplayer import OMXPlayer
 from omxplayer.keys import HIDE_VIDEO, UNHIDE_VIDEO
 
+import time
+
 
 streams = [
     "rtsp://admin:12345678@192.168.10.240:554/cam/realmonitor?channel=1&subtype=0",
@@ -32,9 +34,10 @@ for i in range(len(streams)):
             "--video_fifo=0",
             "--timeout=0",
             "--genlog"
-        ],
-        pause=True
+        ]
     )
+    time.sleep(10)
+    player.pause()
     player.action(HIDE_VIDEO)
     players.append(player)
 

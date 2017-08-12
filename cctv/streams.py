@@ -33,6 +33,7 @@ for i in range(len(streams)):
             streams[i],
             dbus_name="org.mpris.MediaPlayer2.omxplayer",
             args=[
+                "-b",
                 "--layer=%s" % i,
                 "--live",
                 "--threshold=10",
@@ -49,6 +50,7 @@ for i in range(len(streams)):
             streams[i],
             dbus_name=dbus_id,
             args=[
+                "-b",
                 "--layer=%s" % i,
                 "--live",
                 "--threshold=10",
@@ -169,6 +171,15 @@ class CameraStream(Resource):
         return {'stream': cam_num}
 
 
+class CameraStatus(Resource):
+    def get(self):
+        global players
+        status = {}
+        for p in players:
+            status[p.source()] = p.playback_status()
+        return status
+
+
 # class CameraTile(Resource):
 #     def get(self, action):
 #         if action == 'tile':
@@ -185,7 +196,7 @@ app = Flask(__name__)
 api = Api(app)
 
 api.add_resource(CameraStream, '/cam/<int:cam_num>')
-# api.add_resource(CameraTile, '/cam/<string:action>')
+api.add_resource(CameraStatus, '/status')
 
 
 if __name__ == '__main__':

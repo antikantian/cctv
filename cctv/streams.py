@@ -85,6 +85,7 @@ for i in range(len(streams)):
     print("Started player: %s" % i)
     time.sleep(5)
     #player.action(PAUSE)
+    player.set_alpha(150)
     players.append(player)
 
 

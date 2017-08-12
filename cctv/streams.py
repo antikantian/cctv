@@ -94,14 +94,9 @@ class CameraStream(Resource):
     def get(self, cam_num):
         global current_cam
         global players
-        players[current_cam].action(HIDE_VIDEO)
-        time.sleep(0.5)
         players[current_cam].set_video_pos(-1920, -1080, 0, 0)
         time.sleep(0.5)
-        players[cam_num].action(UNHIDE_VIDEO)
-        time.sleep(0.5)
         players[cam_num].set_video_pos(0, 0, 1920, 1080)
-        time.sleep(0.5)
         current_cam = cam_num
         return {'stream': cam_num}
 

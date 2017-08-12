@@ -36,9 +36,8 @@ for i in range(len(streams)):
                 "--blank",
                 "--layer=%s" % i,
                 "--live",
-                "--threshold=10",
-                "--video_fifo=20",
-                "--video_queue=20",
+                "--threshold=0.8",
+                "--video_fifo=1",
                 "--timeout=0",
                 "--genlog",
                 "--win=-1920,-1080,0,0"
@@ -53,9 +52,8 @@ for i in range(len(streams)):
                 "--blank",
                 "--layer=%s" % i,
                 "--live",
-                "--threshold=10",
-                "--video_fifo=20",
-                "--video_queue=20"
+                "--threshold=0.8",
+                "--video_fifo=1",
                 "--timeout=0",
                 "--dbus_name=%s" % dbus_id,
                 "--win=-1920,-1080,0,0",

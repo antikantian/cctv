@@ -36,6 +36,7 @@ for i in range(len(streams)):
                 "--threshold=0",
                 "--video_fifo=0",
                 "--timeout=0",
+                "--genlog"
             ]
         )
     else:
@@ -47,7 +48,8 @@ for i in range(len(streams)):
                 "--threshold=0",
                 "--video_fifo=0",
                 "--timeout=0",
-                "--dbus_name=%s" % dbus_id
+                "--dbus_name=%s" % dbus_id,
+                "--genlog"
             ]
         )
     print("Started player: %s" % i)

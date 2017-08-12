@@ -36,7 +36,8 @@ for i in range(len(streams)):
                 "--threshold=0",
                 "--video_fifo=0",
                 "--timeout=0",
-                "--genlog"
+                "--genlog",
+                "--stats"
             ]
         )
     else:

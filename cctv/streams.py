@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 from flask import Flask, request
 from flask_restful import Resource, Api
 from omxplayer import OMXPlayer
@@ -49,6 +51,7 @@ for i in range(len(streams)):
                 "--timeout=0"
             ]
         )
+    print("Started player: %s" % i)
     time.sleep(10)
     player.pause()
     player.action(HIDE_VIDEO)

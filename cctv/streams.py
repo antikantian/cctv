@@ -36,7 +36,8 @@ for i in range(len(streams)):
                 "--avdict='rtsp_transport:tcp'",
                 "--threshold=0",
                 "--video_fifo=0",
-                "--timeout=0"
+                "--timeout=0",
+                "--genlog"
             ]
         )
     else:
@@ -52,7 +53,7 @@ for i in range(len(streams)):
             ]
         )
     print("Started player: %s" % i)
-    time.sleep(10)
+    #time.sleep(10)
     player.pause()
     player.action(HIDE_VIDEO)
     players.append(player)

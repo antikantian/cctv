@@ -36,8 +36,7 @@ for i in range(len(streams)):
                 "--threshold=0",
                 "--video_fifo=0",
                 "--timeout=0",
-                "--genlog",
-                "--stats"
+                "--dbus_name=%s" % dbus_id
             ]
         )
     else:
@@ -54,8 +53,8 @@ for i in range(len(streams)):
         )
     print("Started player: %s" % i)
     #time.sleep(10)
-    player.action(PAUSE)
-    player.action(HIDE_VIDEO)
+    #player.action(PAUSE)
+    #player.action(HIDE_VIDEO)
     players.append(player)
 
 # player = OMXPlayer(

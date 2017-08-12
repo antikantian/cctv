@@ -54,10 +54,11 @@ for i in range(len(streams)):
                 "--genlog"
             ]
         )
+        player.action(HIDE_VIDEO)
+        
     print("Started player: %s" % i)
     time.sleep(1)
-    player.action(PAUSE)
-    player.action(HIDE_VIDEO)
+    #player.action(PAUSE)
     players.append(player)
 
 # player = OMXPlayer(

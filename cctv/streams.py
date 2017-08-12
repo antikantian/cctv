@@ -88,7 +88,6 @@ for i in range(len(streams)):
     players.append(player)
 
 
-
 current_cam = 0
 
 
@@ -105,12 +104,17 @@ class CameraStream(Resource):
 
 
 class CameraStatus(Resource):
-    def get(self):
+    def get(self, cam_num, action):
         global players
-        status = {}
-        for p in players:
-            status[p.source()] = p.playback_status()
-        return status
+        if action == "pause":
+            players[cam_num].pause()
+        elif action == "play":
+            players[cam_num].play()
+        elif action == "refresh":
+            players[cam_num].pause()
+            time.sleep(1)
+            players[cam_num].play()
+        return {'stream': cam_num}
 
 
 
@@ -119,7 +123,7 @@ app = Flask(__name__)
 api = Api(app)
 
 api.add_resource(CameraStream, '/cam/<int:cam_num>')
-api.add_resource(CameraStatus, '/status')
+api.add_resource(CameraStatus, '/control/<int:cam_num>/<string:action')
 
 
 if __name__ == '__main__':

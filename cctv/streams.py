@@ -24,18 +24,31 @@ streams = [
 players = []
 
 for i in range(len(streams)):
-    dbus_id = "org.mpris.MediaPlayer2.omxplayer" if i == 0 else "org.mpris.MediaPlayer2.omxplayer%s" % i
-    player = OMXPlayer(
-        streams[i],
-        dbus_name=dbus_id,
-        args=[
-            "--layer=%s" % i,
-            "--avdict='rtsp_transport:tcp'",
-            "--threshold=0",
-            "--video_fifo=0",
-            "--timeout=0"
-        ]
-    )
+    dbus_id = "org.mpris.MediaPlayer2.omxplayer%s" % i
+    player = None
+    if i == 0:
+        player = OMXPlayer(
+            streams[i],
+            args=[
+                "--layer=%s" % i,
+                "--avdict='rtsp_transport:tcp'",
+                "--threshold=0",
+                "--video_fifo=0",
+                "--timeout=0"
+            ]
+        )
+    else:
+        player = OMXPlayer(
+            streams[i],
+            dbus_name=dbus_id,
+            args=[
+                "--layer=%s" % i,
+                "--avdict='rtsp_transport:tcp'",
+                "--threshold=0",
+                "--video_fifo=0",
+                "--timeout=0"
+            ]
+        )
     time.sleep(10)
     player.pause()
     player.action(HIDE_VIDEO)

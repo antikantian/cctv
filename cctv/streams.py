@@ -126,7 +126,7 @@ app = Flask(__name__)
 api = Api(app)
 
 api.add_resource(CameraStream, '/cam/<int:cam_num>')
-api.add_resource(CameraStatus, '/control/<int:cam_num>/<string:action')
+api.add_resource(CameraStatus, '/control/<int:cam_num>/<string:action>')
 
 
 if __name__ == '__main__':

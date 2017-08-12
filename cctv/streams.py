@@ -3,7 +3,7 @@ from __future__ import print_function
 from flask import Flask, request
 from flask_restful import Resource, Api
 from omxplayer import OMXPlayer
-from omxplayer.keys import HIDE_VIDEO, UNHIDE_VIDEO
+from omxplayer.keys import HIDE_VIDEO, UNHIDE_VIDEO, PAUSE
 
 import time
 
@@ -54,7 +54,7 @@ for i in range(len(streams)):
         )
     print("Started player: %s" % i)
     #time.sleep(10)
-    player.pause()
+    player.action(PAUSE)
     player.action(HIDE_VIDEO)
     players.append(player)
 

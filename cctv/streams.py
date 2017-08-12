@@ -44,7 +44,6 @@ for i in range(len(streams)):
             dbus_name=dbus_id,
             args=[
                 "--layer=%s" % i,
-                "--avdict='rtsp_transport:tcp'",
                 "--threshold=0",
                 "--video_fifo=0",
                 "--timeout=0",

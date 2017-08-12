@@ -31,12 +31,14 @@ for i in range(len(streams)):
     if i == 0:
         player = OMXPlayer(
             streams[i],
+            dbus_name="org.mpris.MediaPlayer2.omxplayer",
             args=[
                 "--layer=%s" % i,
                 "--threshold=0",
                 "--video_fifo=0",
                 "--timeout=0",
-                "--genlog"
+                "--genlog",
+                "--dbus_name=org.mpris.MediaPlayer2.omxplayer"
             ]
         )
     else:

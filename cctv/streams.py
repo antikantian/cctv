@@ -38,6 +38,7 @@ for i in range(len(streams)):
                 "--video_fifo=0",
                 "--timeout=0",
                 "--genlog",
+                "--win=0,0,0,0"
                 "--dbus_name=org.mpris.MediaPlayer2.omxplayer"
             ]
         )
@@ -51,6 +52,7 @@ for i in range(len(streams)):
                 "--video_fifo=0",
                 "--timeout=0",
                 "--dbus_name=%s" % dbus_id,
+                "--win=0,0,0,0"
                 "--genlog"
             ]
         )
@@ -147,8 +149,10 @@ class CameraStream(Resource):
         else:
             #players[current_cam].pause()
             players[current_cam].action(HIDE_VIDEO)
+            players[current_cam].set_video_pos(0, 0, 0, 0)
             #players[cam_num].play()
             players[cam_num].action(UNHIDE_VIDEO)
+            players[cam_num].set_video_pos(0, 0, 1920, 1080)
             current_cam = cam_num
             return {'stream': cam_num}
 

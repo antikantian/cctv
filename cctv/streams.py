@@ -108,6 +108,39 @@ def get_player(stream_num):
     )
     return p
 
+
+def get_subplayer1(stream_num):
+    p = OMXPlayer(
+        sub_streams[stream_num],
+        args=[
+            "--layer=20",
+            "--threshold=0",
+            "--video_fifo=0",
+            "--timeout=0",
+            "--genlog",
+            "--win=1280,60,1920,540",
+            "--avdict=rtsp_transport:tcp"
+        ]
+    )
+    return p
+
+
+def get_subplayer2(stream_num):
+    p = OMXPlayer(
+        sub_streams[stream_num],
+        args=[
+            "--layer=20",
+            "--threshold=0",
+            "--video_fifo=0",
+            "--timeout=0",
+            "--genlog",
+            "--win=1280,540,1920,1020",
+            "--avdict=rtsp_transport:tcp"
+        ]
+    )
+    return p
+
+
 # players = []
 #
 # for i in range(len(streams)):
@@ -173,6 +206,8 @@ def get_player(stream_num):
 
 
 current_cam = 0
+sub1_current_cam = 0
+sub2_current_cam = 0
 
 
 class CameraStream(Resource):
@@ -186,6 +221,36 @@ class CameraStream(Resource):
             rtsp_feed.quit()
             rtsp_feed = new_feed
             current_cam = cam_num
+
+        return {'stream': current_cam}
+
+
+class SubStream1(Resource):
+    def get(self, cam_num):
+        global sub1_current_cam
+        global sub_stream1
+
+        if cam_num != sub1_current_cam:
+            new_feed = get_subplayer1(cam_num)
+            time.sleep(0.5)
+            sub_stream1.quit()
+            sub_stream1 = new_feed
+            sub1_current_cam = cam_num
+
+        return {'stream': current_cam}
+
+
+class SubStream2(Resource):
+    def get(self, cam_num):
+        global sub2_current_cam
+        global sub_stream2
+
+        if cam_num != sub2_current_cam:
+            new_feed = get_subplayer2(cam_num)
+            time.sleep(0.5)
+            sub_stream2.quit()
+            sub_stream2 = new_feed
+            sub2_current_cam = cam_num
 
         return {'stream': current_cam}
 
@@ -222,6 +287,8 @@ app = Flask(__name__)
 api = Api(app)
 
 api.add_resource(CameraStream, '/cam/<int:cam_num>')
+api.add_resource(SubStream1, '/sub/1/<int:cam_num>')
+api.add_resource(SubStream2, '/sub/2/<int:cam_num>')
 # api.add_resource(CameraStatus, '/control/<int:cam_num>/<string:action>')
 
 

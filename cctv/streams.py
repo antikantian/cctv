@@ -95,7 +95,6 @@ rtsp_feed = OMXPlayer(
 def get_player(stream_num):
     p = OMXPlayer(
         streams[stream_num],
-        dbus_name="org.mpris.MediaPlayer2.omxplayer%s" % stream_num,
         args=[
             "--layer=20",
             "--threshold=0",
@@ -103,8 +102,7 @@ def get_player(stream_num):
             "--timeout=0",
             "--genlog",
             "--win=0,180,1280,900",
-            "--avdict=rtsp_transport:tcp",
-            "--dbus_name=org.mpris.MediaPlayer2.omxplayer%s" % stream_num
+            "--avdict=rtsp_transport:tcp"
         ]
     )
     return p

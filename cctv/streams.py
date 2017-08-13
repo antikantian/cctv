@@ -68,6 +68,7 @@ sub_streams = [
 rtsp_feed = OMXPlayer(
     streams[0],
     args=[
+        "--live",
         "--layer=20",
         "--threshold=0",
         "--video_fifo=0",

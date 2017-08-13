@@ -296,7 +296,7 @@ if __name__ == '__main__':
     pygame.init()
     pygame.mouse.set_visible(False)
 
-    screen = pygame.display.set_mode((0, 0))
+    screen = pygame.display.set_mode((1920, 1080))
     pygame.display.update()
 
     app.run(host='0.0.0.0')

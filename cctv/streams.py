@@ -60,7 +60,7 @@ rtsp_feed = OMXPlayer(
         "--video_fifo=0",
         "--timeout=0",
         "--genlog",
-        "--win=0,288,1920,1080",
+        "--win=0,308,1280,720",
         "--avdict=rtsp_transport:tcp"
     ]
 )
@@ -75,7 +75,7 @@ def get_player(stream_num):
             "--video_fifo=0",
             "--timeout=0",
             "--genlog",
-            "--win=0,0,1920,1080",
+            "--win=0,308,1280,720",
             "--avdict=rtsp_transport:tcp"
         ]
     )

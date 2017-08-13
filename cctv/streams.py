@@ -42,13 +42,25 @@ sub_streams = [
 sub_stream1 = OMXPlayer(
     sub_streams[3],
     args=[
-        "--live",
         "--layer=20",
         "--threshold=0",
         "--video_fifo=0",
         "--timeout=0",
         "--genlog",
         "--win=1280,0,1920,480",
+        "--avdict=rtsp_transport:tcp"
+    ]
+)
+
+sub_stream2 = OMXPlayer(
+    sub_streams[2],
+    args=[
+        "--layer=20",
+        "--threshold=0",
+        "--video_fifo=0",
+        "--timeout=0",
+        "--genlog",
+        "--win=1280,480,1920,960",
         "--avdict=rtsp_transport:tcp"
     ]
 )
@@ -69,7 +81,6 @@ sub_stream1 = OMXPlayer(
 rtsp_feed = OMXPlayer(
     streams[0],
     args=[
-        "--live",
         "--layer=20",
         "--threshold=0",
         "--video_fifo=0",

@@ -39,31 +39,31 @@ sub_streams = [
 ]
 
 
-sub_stream1 = OMXPlayer(
-    sub_streams[1],
-    args=[
-        "--layer=20",
-        "--threshold=0",
-        "--video_fifo=0",
-        "--timeout=0",
-        "--genlog",
-        "--win=0,0,352,288",
-        "--avdict=rtsp_transport:tcp"
-    ]
-)
-
-sub_stream2 = OMXPlayer(
-    sub_streams[2],
-    args=[
-        "--layer=20",
-        "--threshold=0",
-        "--video_fifo=0",
-        "--timeout=0",
-        "--genlog",
-        "--win=352,0,704,288",
-        "--avdict=rtsp_transport:tcp"
-    ]
-)
+# sub_stream1 = OMXPlayer(
+#     sub_streams[1],
+#     args=[
+#         "--layer=20",
+#         "--threshold=0",
+#         "--video_fifo=0",
+#         "--timeout=0",
+#         "--genlog",
+#         "--win=0,0,352,288",
+#         "--avdict=rtsp_transport:tcp"
+#     ]
+# )
+#
+# sub_stream2 = OMXPlayer(
+#     sub_streams[2],
+#     args=[
+#         "--layer=20",
+#         "--threshold=0",
+#         "--video_fifo=0",
+#         "--timeout=0",
+#         "--genlog",
+#         "--win=352,0,704,288",
+#         "--avdict=rtsp_transport:tcp"
+#     ]
+# )
 
 rtsp_feed = OMXPlayer(
     streams[0],
@@ -73,7 +73,7 @@ rtsp_feed = OMXPlayer(
         "--video_fifo=0",
         "--timeout=0",
         "--genlog",
-        "--win=0,308,1280,720",
+        "--win=0,0,1280,720",
         "--avdict=rtsp_transport:tcp"
     ]
 )
@@ -82,6 +82,7 @@ rtsp_feed = OMXPlayer(
 def get_player(stream_num):
     p = OMXPlayer(
         streams[stream_num],
+        dbus_name="org.mpris.MediaPlayer2.omxplayer%s" % stream_num,
         args=[
             "--layer=20",
             "--threshold=0",
@@ -89,7 +90,8 @@ def get_player(stream_num):
             "--timeout=0",
             "--genlog",
             "--win=0,308,1280,720",
-            "--avdict=rtsp_transport:tcp"
+            "--avdict=rtsp_transport:tcp",
+            "--dbus_name=org.mpris.MediaPlayer2.omxplayer%s" % stream_num
         ]
     )
     return p

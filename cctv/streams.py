@@ -40,7 +40,7 @@ sub_streams = [
 
 
 sub_stream1 = OMXPlayer(
-    sub_streams[0],
+    sub_streams[1],
     args=[
         "--layer=20",
         "--threshold=0",
@@ -48,6 +48,19 @@ sub_stream1 = OMXPlayer(
         "--timeout=0",
         "--genlog",
         "--win=0,0,352,288",
+        "--avdict=rtsp_transport:tcp"
+    ]
+)
+
+sub_stream2 = OMXPlayer(
+    sub_streams[2],
+    args=[
+        "--layer=20",
+        "--threshold=0",
+        "--video_fifo=0",
+        "--timeout=0",
+        "--genlog",
+        "--win=352,0,704,288",
         "--avdict=rtsp_transport:tcp"
     ]
 )

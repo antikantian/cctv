@@ -9,6 +9,12 @@ import time
 import pygame
 
 
+pygame.init()
+pygame.mouse.set_visible(False)
+
+screen = pygame.display.set_mode((1920, 1080))
+pygame.display.update()
+
 streams = [
     "rtsp://admin:12345678@192.168.10.240:554/cam/realmonitor?channel=1&subtype=0",
     "rtsp://admin:12345678@192.168.10.241:554/cam/realmonitor?channel=1&subtype=0",
@@ -294,11 +300,5 @@ api.add_resource(CameraStream, '/cam/<int:cam_num>')
 
 
 if __name__ == '__main__':
-    pygame.init()
-    pygame.mouse.set_visible(False)
-
-    screen = pygame.display.set_mode((1920, 1080))
-    pygame.display.update()
-
     app.run(host='0.0.0.0')
 

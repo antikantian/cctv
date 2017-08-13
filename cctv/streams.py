@@ -86,7 +86,7 @@ rtsp_feed = OMXPlayer(
         "--video_fifo=0",
         "--timeout=0",
         "--genlog",
-        "--win=0,0,1280,720",
+        "--win=0,180,1280,900",
         "--avdict=rtsp_transport:tcp"
     ]
 )

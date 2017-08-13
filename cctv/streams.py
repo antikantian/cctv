@@ -6,6 +6,7 @@ from omxplayer import OMXPlayer
 from omxplayer.keys import HIDE_VIDEO, UNHIDE_VIDEO, PAUSE
 
 import time
+import pygame
 
 
 streams = [
@@ -225,5 +226,11 @@ api.add_resource(CameraStream, '/cam/<int:cam_num>')
 
 
 if __name__ == '__main__':
+    pygame.init()
+    pygame.mouse.set_visible(False)
+
+    screen = pygame.display.set_mode((0, 0))
+    pygame.display.update()
+
     app.run(host='0.0.0.0')
 

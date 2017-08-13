@@ -47,7 +47,7 @@ sub_stream1 = OMXPlayer(
         "--video_fifo=0",
         "--timeout=0",
         "--genlog",
-        "--win=1280,0,1920,480",
+        "--win=1280,60,1920,540",
         "--avdict=rtsp_transport:tcp"
     ]
 )
@@ -60,7 +60,7 @@ sub_stream2 = OMXPlayer(
         "--video_fifo=0",
         "--timeout=0",
         "--genlog",
-        "--win=1280,600,1920,1080",
+        "--win=1280,540,1920,1020",
         "--avdict=rtsp_transport:tcp"
     ]
 )

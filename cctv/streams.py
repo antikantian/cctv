@@ -23,43 +23,72 @@ streams = [
     "rtsp://192.168.10.171:554/stander/livestream/0/0"
 ]
 
-players = []
+rtsp_feed = OMXPlayer(
+    streams[0],
+    args=[
+        "--layer=20",
+        "--threshold=0",
+        "--video_fifo=0",
+        "--timeout=0",
+        "--genlog",
+        "--win=0,0,1920,1080",
+        "--avdict='rtsp_transport:tcp'"
+    ]
+)
 
-for i in range(len(streams)):
-    dbus_id = "org.mpris.MediaPlayer2.omxplayer%s" % i
-    player = None
-    if i == 0:
-        player = OMXPlayer(
-            streams[i],
-            dbus_name="org.mpris.MediaPlayer2.omxplayer",
-            args=[
-                #"--blank",
-                "--layer=%s" % i,
-                "--live",
-                "--threshold=0.8",
-                "--video_fifo=1",
-                "--timeout=0",
-                "--genlog",
-                "--win=-1920,-1080,0,0"
-                "--dbus_name=org.mpris.MediaPlayer2.omxplayer"
-            ]
-        )
-    else:
-        player = OMXPlayer(
-            streams[i],
-            dbus_name=dbus_id,
-            args=[
-                #"--blank",
-                "--layer=%s" % i,
-                "--live",
-                "--threshold=0.8",
-                "--video_fifo=1",
-                "--timeout=0",
-                "--dbus_name=%s" % dbus_id,
-                "--win=-1920,-1080,0,0",
-                "--genlog"
-            ]
-        )
+
+def get_player(stream_num):
+    p = OMXPlayer(
+        streams[stream_num],
+        args=[
+            "--layer=20",
+            "--threshold=0",
+            "--video_fifo=0",
+            "--timeout=0",
+            "--genlog",
+            "--win=0,0,1920,1080",
+            "--avdict='rtsp_transport:tcp'"
+        ]
+    )
+    return p
+
+# players = []
+#
+# for i in range(len(streams)):
+#     dbus_id = "org.mpris.MediaPlayer2.omxplayer%s" % i
+#     player = None
+#     if i == 0:
+#         player = OMXPlayer(
+#             streams[i],
+#             dbus_name="org.mpris.MediaPlayer2.omxplayer",
+#             args=[
+#                 #"--blank",
+#                 "--layer=%s" % i,
+#                 "--live",
+#                 "--threshold=0.8",
+#                 "--video_fifo=1",
+#                 "--timeout=0",
+#                 "--genlog",
+#                 "--win=-1920,-1080,0,0"
+#                 "--dbus_name=org.mpris.MediaPlayer2.omxplayer"
+#             ]
+#         )
+#     else:
+#         player = OMXPlayer(
+#             streams[i],
+#             dbus_name=dbus_id,
+#             args=[
+#                 #"--blank",
+#                 "--layer=%s" % i,
+#                 "--live",
+#                 "--threshold=0.8",
+#                 "--video_fifo=1",
+#                 "--timeout=0",
+#                 "--dbus_name=%s" % dbus_id,
+#                 "--win=-1920,-1080,0,0",
+#                 "--genlog"
+#             ]
+#         )
         # time.sleep(5)
         # pb_status = player.playback_status() == "Playing"
         # while not pb_status:
@@ -82,9 +111,9 @@ for i in range(len(streams)):
         #     time.sleep(10)
         #     pb_status = player.playback_status() == "Playing"
 
-    print("Started player: %s" % i)
-    time.sleep(5)
-    players.append(player)
+    # print("Started player: %s" % i)
+    # time.sleep(5)
+    # players.append(player)
 
 
 current_cam = 0
@@ -93,26 +122,42 @@ current_cam = 0
 class CameraStream(Resource):
     def get(self, cam_num):
         global current_cam
-        global players
-        players[current_cam].set_video_pos(-1920, -1080, 0, 0)
-        time.sleep(0.5)
-        players[cam_num].set_video_pos(0, 0, 1920, 1080)
-        current_cam = cam_num
-        return {'stream': cam_num}
+        global rtsp_feed
+
+        if cam_num != current_cam:
+            new_feed = get_player(cam_num)
+            time.sleep(0.5)
+            rtsp_feed.quit()
+            rtsp_feed = new_feed
+            current_cam = cam_num
+
+        return {'stream': current_cam}
 
 
-class CameraStatus(Resource):
-    def get(self, cam_num, action):
-        global players
-        if action == "pause":
-            players[cam_num].pause()
-        elif action == "play":
-            players[cam_num].play()
-        elif action == "refresh":
-            players[cam_num].pause()
-            time.sleep(1)
-            players[cam_num].play()
-        return {'stream': cam_num}
+
+# class CameraStream(Resource):
+#     def get(self, cam_num):
+#         global current_cam
+#         global players
+#         players[current_cam].set_video_pos(-1920, -1080, 0, 0)
+#         time.sleep(0.5)
+#         players[cam_num].set_video_pos(0, 0, 1920, 1080)
+#         current_cam = cam_num
+#         return {'stream': cam_num}
+#
+#
+# class CameraStatus(Resource):
+#     def get(self, cam_num, action):
+#         global players
+#         if action == "pause":
+#             players[cam_num].pause()
+#         elif action == "play":
+#             players[cam_num].play()
+#         elif action == "refresh":
+#             players[cam_num].pause()
+#             time.sleep(1)
+#             players[cam_num].play()
+#         return {'stream': cam_num}
 
 
 
@@ -121,7 +166,7 @@ app = Flask(__name__)
 api = Api(app)
 
 api.add_resource(CameraStream, '/cam/<int:cam_num>')
-api.add_resource(CameraStatus, '/control/<int:cam_num>/<string:action>')
+# api.add_resource(CameraStatus, '/control/<int:cam_num>/<string:action>')
 
 
 if __name__ == '__main__':
